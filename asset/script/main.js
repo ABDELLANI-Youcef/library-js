@@ -40,12 +40,29 @@ function dispalybooks(arr) {
     read_td.textContent = arr[i].read;
     row.appendChild(read_td);
     table.appendChild(row);
+
+    let remove_td = document.createElement('td');
+    let remove_btn = document.createElement('button');
+    remove_btn.classList.add('remove_book');
+    remove_btn.textContent = 'Delete Book';
+    remove_btn.dataset.indexNumber = i;
+    remove_td.appendChild(remove_btn);
+    row.appendChild(remove_td);
   }
 }
 
 addBookToLibrary("Livre", "splinter", 154, true);
 
 dispalybooks(myLibrary);
+
+let removeBook = document.querySelector('.remove_book');
+
+removeBook = document.addEventListener('click', function() {
+  let inx = removeBook.dataset.indexNumber;
+  myLibrary.splice(inx, 1);
+  dispalybooks(myLibrary);
+});
+
 
 // Adding Book button
 
@@ -71,7 +88,8 @@ submitBtn.addEventListener('click', function () {
   read = read == "true"
   console.log(read);
   addBookToLibrary(title , author, pagesnum, read);
-  addBookToPage(title , author, pagesnum, read);
+  // addBookToPage(title , author, pagesnum, read);
+  dispalybooks(myLibrary);
   let addBookForm = document.querySelector('#addbook_form');
   addBookForm.classList.toggle('hide_element');
 })
