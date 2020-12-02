@@ -49,8 +49,16 @@ dispalybooks(myLibrary);
 
 // Adding Book button
 
+// let addBtn_toggled = false;
+
 let addBookBtn = document.querySelector('#addbook_btn');
 addBookBtn.addEventListener("click", function() {
   let addBookForm = document.querySelector('#addbook_form');
   addBookForm.classList.toggle('hide_element');
-})
+});
+
+let cancelBookBtn = document.querySelector('#cancel_book_data');
+cancelBookBtn.addEventListener("click", function() {
+  let addBookForm = document.querySelector('#addbook_form');
+  addBookForm.classList.toggle('hide_element');
+});

@@ -19,10 +19,12 @@
 
     <div class="user_input">
       <button id="addbook_btn">
-        ADD NEW BOOK
+        <!-- <span id="addbook_txt">ADD NEW BOOK</span>
+        <span id="cancel_txt">CACEL</span> -->
+        add book
       </button>
 
-      <form id="addbook_form">
+      <form id="addbook_form" class="hide_element">
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title" placeholder="Book title"><br>
         <label for="author">Author:</label><br>
@@ -36,7 +38,22 @@
           <label for="readfalse">Haven't Read it yet:</label><br>
           <input type="radio" id="readfalse" name="read" value="false" checked><br>
         </div>
+
+        <button id='submit_book_data'>
+          Submit Book info
+        </button>
+        <button id='cancel_book_data'>
+          Cancel
+        </button>
       </form>
+      <!-- <div id="form_submission" class="hide_element">
+        <button id='submit_book_data'>
+          Submit Book info
+        </button>
+        <button id='cancel_book_data'>
+          Cancel
+        </button>
+      </div> -->
     </div>
     <script src="asset/script/main.js"></script>
   </body>
