@@ -46,3 +46,11 @@ function dispalybooks(arr) {
 addBookToLibrary("Livre", "splinter", 154, true);
 
 dispalybooks(myLibrary);
+
+// Adding Book button
+
+let addBookBtn = document.querySelector('#addbook_btn');
+addBookBtn.addEventListener("click", function() {
+  let addBookForm = document.querySelector('#addbook_form');
+  addBookForm.classList.toggle('hide_element');
+})
