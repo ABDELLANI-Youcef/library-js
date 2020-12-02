@@ -1,10 +1,13 @@
 let myLibrary = [];
+let count = 0
 
 function Book(title , author, page_nums, read = false) {
   this.title = title;
   this.author = author;
   this.page_nums = page_nums;
   this.read = read;
+  this.count = count;
+  count++
 }
 
 // Book.prototype.info = ()=>{
@@ -23,6 +26,7 @@ function dispalybooks(arr) {
   for (let i = 0 ; i < arr.length; i++)
   {
     let row = document.createElement('tr');
+    row.setAttribute('id' , `row_${arr[i].count}`)  
 
     let title_td = document.createElement('td');
     title_td.textContent = arr[i].title;
@@ -45,23 +49,61 @@ function dispalybooks(arr) {
     let remove_btn = document.createElement('button');
     remove_btn.classList.add('remove_book');
     remove_btn.textContent = 'Delete Book';
-    remove_btn.dataset.indexNumber = i;
+    remove_btn.setAttribute('id' , `delete_${arr[i].count}`)
+    remove_btn.dataset.indexNumber = arr[i].count;
+    remove_btn.addEventListener('click', function(e) {
+      
+      let index = e.target.dataset.indexNumber;
+      console.log(parseInt(index));
+      let i = find_book(index);
+      console.log(i);
+      myLibrary.splice(index, 1);
+      const table = document.querySelector("table");
+      const target = document.querySelector(`row_${index}`);
+      console.log(`row_${index}`);
+      console.log(target);
+      table.removeChild(target);
+    });
     remove_td.appendChild(remove_btn);
     row.appendChild(remove_td);
   }
+}
+
+function find_book(index) {
+  let min = 0;
+  let max = myLibrary.length-1;
+  let i = Math.floor((min + max)/2);
+  let found = false;
+  while (min <= max && !found){
+    found = myLibrary[i].count == index;
+    if (!found) {
+      if (myLibrary[i].count > index)
+      {
+        max = i-1
+      }
+      else
+      {
+        min = i+1
+      }
+      let i = Math.floor((min + max)/2);
+    }
+  }
+  return i;
 }
 
 addBookToLibrary("Livre", "splinter", 154, true);
 
 dispalybooks(myLibrary);
 
-let removeBook = document.querySelector('.remove_book');
+// let removeBook = document.querySelector('.remove_book');
 
-removeBook = document.addEventListener('click', function() {
-  let inx = removeBook.dataset.indexNumber;
-  myLibrary.splice(inx, 1);
-  dispalybooks(myLibrary);
-});
+// removeBook = document.addEventListener('click', function() {
+//   let index = removeBook.dataset.indexNumber;
+//   myLibrary.splice(index, 1);
+//   const table = document.querySelector("table");
+//   const target = document.querySelector(`row_${index}`);
+//   table.removeChild(target);
+// });
 
 
 // Adding Book button
@@ -86,10 +128,9 @@ submitBtn.addEventListener('click', function () {
   pagesnum = parseInt(pagesnum);
   let read = document.querySelector('input[name="read"]:checked').value;
   read = read == "true"
-  console.log(read);
   addBookToLibrary(title , author, pagesnum, read);
-  // addBookToPage(title , author, pagesnum, read);
-  dispalybooks(myLibrary);
+  addBookToPage(title , author, pagesnum, read);
+  // dispalybooks(myLibrary);
   let addBookForm = document.querySelector('#addbook_form');
   addBookForm.classList.toggle('hide_element');
 })
@@ -97,7 +138,7 @@ submitBtn.addEventListener('click', function () {
 function addBookToPage(title , author, pagesnum, read) {
   const table = document.querySelector("table");
   let row = document.createElement('tr');
-
+  row.setAttribute('id' , `row_${myLibrary[myLibrary.length-1].count}`)
   let title_td = document.createElement('td');
   title_td.textContent = title;
   row.appendChild(title_td);
@@ -112,6 +153,22 @@ function addBookToPage(title , author, pagesnum, read) {
 
   let read_td = document.createElement('td');
   read_td.textContent = read;
+  let remove_td = document.createElement('td');
+  let remove_btn = document.createElement('button');
+  remove_btn.classList.add('remove_book');
+  remove_btn.textContent = 'Delete Book';
+  remove_btn.setAttribute('id' , `delete_${myLibrary[myLibrary.length -1].count}`);
+  remove_btn.dataset.indexNumber = myLibrary[myLibrary.length -1].count;
+  remove_btn.addEventListener('click', function(e) {
+    let index = e.target.dataset.indexNumber;
+    console.log(index);
+  });
   row.appendChild(read_td);
+  remove_td.appendChild(remove_btn);
+  row.appendChild(remove_td);
+
+
+  // remove_btn.dataset.indexNumber = i;
+
   table.appendChild(row);
 }
