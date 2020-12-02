@@ -52,16 +52,12 @@ function dispalybooks(arr) {
     remove_btn.setAttribute('id' , `delete_${arr[i].count}`)
     remove_btn.dataset.indexNumber = arr[i].count;
     remove_btn.addEventListener('click', function(e) {
-      
       let index = e.target.dataset.indexNumber;
       console.log(parseInt(index));
       let i = find_book(index);
-      console.log(i);
       myLibrary.splice(index, 1);
       const table = document.querySelector("table");
-      const target = document.querySelector(`row_${index}`);
-      console.log(`row_${index}`);
-      console.log(target);
+      const target = document.querySelector(`#row_${index}`);
       table.removeChild(target);
     });
     remove_td.appendChild(remove_btn);
@@ -161,7 +157,12 @@ function addBookToPage(title , author, pagesnum, read) {
   remove_btn.dataset.indexNumber = myLibrary[myLibrary.length -1].count;
   remove_btn.addEventListener('click', function(e) {
     let index = e.target.dataset.indexNumber;
-    console.log(index);
+    console.log(parseInt(index));
+    let i = find_book(index);
+    myLibrary.splice(index, 1);
+    const table = document.querySelector("table");
+    const target = document.querySelector(`#row_${index}`);
+    table.removeChild(target);
   });
   row.appendChild(read_td);
   remove_td.appendChild(remove_btn);
