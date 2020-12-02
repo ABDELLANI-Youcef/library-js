@@ -16,6 +16,28 @@
       </tr>
       
     </table>
+
+    <div class="user_input">
+      <button>
+        ADD NEW BOOK
+      </button>
+
+      <form>
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" placeholder="Book title"><br>
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author" placeholder="Book author"><br>
+        <label for="pagesnum">Pages number:</label><br>
+        <input type="number" name="pagesnum" id="pagesnum" placeholder="Pages numbers"><br>
+
+        <div class="radio">
+          <label for="readtrue">Already read it:</label><br>
+          <input type="radio" id="readtrue" name="read" value="true"><br>
+          <label for="readfalse">Haven't Read it yet:</label><br>
+          <input type="radio" id="readfalse" name="read" value="false" checked><br>
+        </div>
+      </form>
+    </div>
     <script src="asset/script/main.js"></script>
   </body>
 </html>
