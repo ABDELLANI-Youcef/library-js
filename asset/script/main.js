@@ -14,7 +14,7 @@ function Book(title , author, page_nums, read = false) {
 // }
 
 function addBookToLibrary(title , author, page_nums, read = false) {
-  book = new Book(title , author, page_nums, read);
+  let book = new Book(title , author, page_nums, read);
   myLibrary.push(book);
 }
 
@@ -49,8 +49,6 @@ dispalybooks(myLibrary);
 
 // Adding Book button
 
-// let addBtn_toggled = false;
-
 let addBookBtn = document.querySelector('#addbook_btn');
 addBookBtn.addEventListener("click", function() {
   let addBookForm = document.querySelector('#addbook_form');
@@ -62,3 +60,40 @@ cancelBookBtn.addEventListener("click", function() {
   let addBookForm = document.querySelector('#addbook_form');
   addBookForm.classList.toggle('hide_element');
 });
+
+let submitBtn = document.querySelector("#submit_book_data");
+submitBtn.addEventListener('click', function () {
+  let title = document.querySelector("#title").value;
+  let author = document.querySelector("#author").value;
+  let pagesnum = document.querySelector("#pagesnum").value;
+  pagesnum = parseInt(pagesnum);
+  let read = document.querySelector('input[name="read"]:checked').value;
+  read = read == "true"
+  console.log(read);
+  addBookToLibrary(title , author, pagesnum, read);
+  addBookToPage(title , author, pagesnum, read);
+  let addBookForm = document.querySelector('#addbook_form');
+  addBookForm.classList.toggle('hide_element');
+})
+
+function addBookToPage(title , author, pagesnum, read) {
+  const table = document.querySelector("table");
+  let row = document.createElement('tr');
+
+  let title_td = document.createElement('td');
+  title_td.textContent = title;
+  row.appendChild(title_td);
+
+  let author_td = document.createElement('td');
+  author_td.textContent = author;
+  row.appendChild(author_td);
+
+  let page_nums_td = document.createElement('td');
+  page_nums_td.textContent = pagesnum;
+  row.appendChild(page_nums_td);
+
+  let read_td = document.createElement('td');
+  read_td.textContent = read;
+  row.appendChild(read_td);
+  table.appendChild(row);
+}
