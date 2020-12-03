@@ -2,8 +2,7 @@
 
 ## About
 
-In this application we created a Library application that store a list of books.
-
+In this application, we created a Library application that stores a list of books.
 We used:
 
 - Javascript
@@ -17,7 +16,7 @@ We used:
 The features implemented with this project are:
 
 - User can create a book by entring its data
-- User can delete a book from library(book list)
+- User can delete a book from the library(book list)
 - User can toggle the 'read' status of the book via a button in the display
 ## Getting started (Development)
 
