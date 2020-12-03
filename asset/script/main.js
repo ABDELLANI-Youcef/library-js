@@ -109,13 +109,12 @@ submitBtn.addEventListener('click', function () {
   let pagesnum = document.querySelector("#pagesnum").value;
   pagesnum = parseInt(pagesnum);
   let read = document.querySelector('input[name="read"]:checked').value;
-  read = read == "true"
+  read = read == "true";
   addBookToLibrary(title , author, pagesnum, read);
-  addBookToPage(title , author, pagesnum, read);
-  // dispalybooks(myLibrary);
+  myLibrary[myLibrary.length-1].addBookToPage();
   let addBookForm = document.querySelector('#addbook_form');
   addBookForm.classList.toggle('hide_element');
-})
+});
 
 addBookToLibrary("Livre", "splinter", 154, true);
 addBookToLibrary("Livre1", "splinter", 154, true);
