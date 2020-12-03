@@ -27,8 +27,22 @@ Book.prototype.addBookToPage = function() {
   row.appendChild(page_nums_td);
 
   let read_td = document.createElement('td');
-  read_td.textContent = this.read;
+  let read_btn = document.createElement('button');
+  read_btn.classList.add('reading_status');
+  read_btn.textContent = this.read;
+  read_btn.setAttribute('id' , `read_${this.count}`);
+  read_btn.dataset.indexNumber = this.count;
+  read_td.appendChild(read_btn);
   row.appendChild(read_td);
+
+  read_btn.addEventListener('click', function(e) {
+    let index = e.target.dataset.indexNumber;
+    console.log(`read indx ${parseInt(index)}`);
+    let i = find_book(index);
+    myLibrary[i].read = !myLibrary[i].read;
+    e.target.textContent =  myLibrary[i].read;
+  });
+
 
   let remove_td = document.createElement('td');
   let remove_btn = document.createElement('button');
