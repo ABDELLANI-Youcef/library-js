@@ -29,6 +29,29 @@ function findBook(index) {
   return i;
 }
 
+function changeReadStatus(i) {
+  myLibrary[i].read = !myLibrary[i].read;
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function removeFromLibrary(index) {
+  const i = findBook(index);
+  myLibrary.splice(i, 1);
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function addBookToLibrary(title, author, pageNum, read = false) {
+  const book = new Book(title, author, pageNum, read);
+  myLibrary.push(book);
+}
+
+function dispalybooks(arr) {
+  for (let i = 0; i < arr.length; i += 1) {
+    Object.setPrototypeOf(arr[i], Book.prototype);
+    arr[i].addBookToPage();
+  }
+}
+
 Book.prototype.addBookToPage = function show() {
   const table = document.querySelector('table');
   const row = document.createElement('tr');
@@ -57,11 +80,9 @@ Book.prototype.addBookToPage = function show() {
   readBtn.addEventListener('click', (e) => {
     const index = e.target.dataset.indexNumber;
     const i = findBook(index);
-    myLibrary[i].read = !myLibrary[i].read;
+    changeReadStatus(i);
     e.target.textContent = myLibrary[i].read;
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
   });
-
 
   const removeTd = document.createElement('td');
   const removeBtn = document.createElement('button');
@@ -75,26 +96,13 @@ Book.prototype.addBookToPage = function show() {
   removeBtn.dataset.indexNumber = this.count;
   removeBtn.addEventListener('click', (e) => {
     const index = e.target.dataset.indexNumber;
-    const i = findBook(index);
-    myLibrary.splice(i, 1);
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+    removeFromLibrary(index);
     const table = document.querySelector('table');
     const target = document.querySelector(`#row_${index}`);
     table.removeChild(target);
   });
 };
 
-function addBookToLibrary(title, author, pageNum, read = false) {
-  const book = new Book(title, author, pageNum, read);
-  myLibrary.push(book);
-}
-
-function dispalybooks(arr) {
-  for (let i = 0; i < arr.length; i += 1) {
-    Object.setPrototypeOf(arr[i], Book.prototype);
-    arr[i].addBookToPage();
-  }
-}
 
 // Adding Book button
 
